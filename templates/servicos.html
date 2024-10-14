@@ -1,171 +1,112 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Serviços</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-   <!-- Custom CSS -->
-   <style>
-    /* Custom Header */
-    header {
-      background-color: #4da6ff;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-icons.css') }}">
+    
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+        }
 
-    /* Cards with hover effect */
-    .card-custom {
-      border-radius: 10px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+        .menu {
+            background-color: #004080;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-    .card-custom:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
+        .menu .back-icon {
+            position: absolute;
+            left: 15px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: white;
+            transition: color 0.3s;
+        }
 
-    .icon-custom {
-      font-size: 3rem;
-      color: #007bff;
-    }
+        .menu .back-icon:hover {
+            color: #ddd;
+        }
 
-    /* About Section Background */
-    #about {
-      background-color: #e6f7ff;
-    }
+        .menu h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
 
-    /* Services Section Background */
-    #services {
-      background-color: #f0f8ff;
-    }
-  </style>
+        .menu-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+        .menu-buttons .btn {
+            background-color: #004080;
+            color: white;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .menu-buttons .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-buttons .btn i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-
 <body>
-
-  <!-- Header with Back Icon -->
-  <header class="d-flex justify-content-between align-items-center p-3">
-    <div>
-      <a href="#" class="text-white">
-        <i class="bi bi-arrow-left-circle" style="font-size: 30px;"></i>
-      </a>
-    </div>
-    <div class="contact-info">
-      <p class="mb-0">AeroPag</p>
-    </div>
-    <!-- Icon to go back to home screen -->
-    <div>
-      <a href="index.html" class="text-white">
-        <i class="bi bi-house-door" style="font-size: 30px;"></i>
-      </a>
-    </div>
-  </header>
-
-  <div class="container">
-    <div class="header">
-      <h4>Cadastro de Serviços</h4>
+    <div class="menu">
+        <button class="back-icon" onclick="window.location.href='';{{ url_for('index') }}">
+            <i class="bi bi-arrow-left-circle" style="font-size: 30px;"></i>
+        </button>
+        <h1>Serviços</h1>
     </div>
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="tarifas-tab" data-bs-toggle="tab" data-bs-target="#tarifas" type="button" role="tab">Tarifas</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="aviao-tab" data-bs-toggle="tab" data-bs-target="#aviao" type="button" role="tab">Aviões</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes" type="button" role="tab">Clientes</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="cobrancas-tab" data-bs-toggle="tab" data-bs-target="#cobrancas" type="button" role="tab">Cobranças</button>
-      </li>
-    </ul>
-
-    <div class="tab-content mt-3">
-      <!-- Formulário de Tarifas -->
-      <div class="tab-pane fade show active" id="tarifas" role="tabpanel" aria-labelledby="tarifas-tab">
-        <form id="tarifasForm">
-          <div class="mb-3">
-            <label for="tipoPreferencia" class="form-label">Tipo de Preferência em Pátio</label>
-            <select class="form-select" id="tipoPreferencia" name="tipoPreferencia">
-              <option selected>Selecione uma opção</option>
-              <option value="domestico">Doméstico</option>
-              <option value="internacional">Internacional</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="valor" class="form-label">Valor</label>
-            <input type="text" class="form-control" id="valor" name="valor">
-          </div>
-          <div class="mb-3">
-            <label for="grupo" class="form-label">Grupo</label>
-            <input type="text" class="form-control" id="grupo" name="grupo">
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-      </div>
-
-      <!-- Formulário de Aviões -->
-      <div class="tab-pane fade" id="aviao" role="tabpanel" aria-labelledby="aviao-tab">
-        <form id="aviaoForm">
-          <div class="mb-3">
-            <label for="prefixoAviao" class="form-label">Prefixo do Avião</label>
-            <input type="text" class="form-control" id="prefixoAviao" name="prefixoAviao">
-          </div>
-          <div class="mb-3">
-            <label for="toneladas" class="form-label">Toneladas</label>
-            <input type="number" class="form-control" id="toneladas" name="toneladas">
-          </div>
-          <div class="mb-3">
-            <label for="grupoAviao" class="form-label">Grupo</label>
-            <input type="text" class="form-control" id="grupoAviao" name="grupoAviao">
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-      </div>
-
-      <!-- Formulário de Clientes -->
-      <div class="tab-pane fade" id="clientes" role="tabpanel" aria-labelledby="clientes-tab">
-        <form id="clientesForm">
-          <div class="mb-3">
-            <label for="nomeCliente" class="form-label">Nome do Cliente</label>
-            <input type="text" class="form-control" id="nomeCliente" name="nomeCliente">
-          </div>
-          <div class="mb-3">
-            <label for="emailCliente" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="emailCliente" name="emailCliente">
-          </div>
-          <div class="mb-3">
-            <label for="telefoneCliente" class="form-label">Telefone</label>
-            <input type="tel" class="form-control" id="telefoneCliente">
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-      </div>
-
-      <!-- Formulário de Cobranças -->
-      <div class="tab-pane fade" id="cobrancas" role="tabpanel" aria-labelledby="cobrancas-tab">
-        <form id="cobrancasForm">
-          <div class="mb-3">
-            <label for="codigoTarifa" class="form-label">Código da Tarifa</label>
-            <input type="text" class="form-control" id="codigoTarifa" name="codigoTarifa">
-          </div>
-          <div class="mb-3">
-            <label for="quantidade" class="form-label">Quantidade</label>
-            <input type="number" class="form-control" id="quantidade" name="quantidade">
-          </div>
-          <div class="mb-3">
-            <label for="total" class="form-label">Total</label>
-            <input type="number" class="form-control" id="total" name="total">
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-      </div>
-
+    <div class="menu-buttons">
+        <a href="{{ url_for('tarifas') }}" class="btn">
+            <i class="bi bi-cash-stack"></i>
+            Tarifas
+        </a>
+        <a href="{{ url_for('avioes') }}" class="btn">
+            <i class="bi bi-airplane-engines"></i>
+            Aviões
+        </a>
+        <a href="{{ url_for('clientes') }}" class="btn">
+            <i class="bi bi-person-fill"></i>
+            Clientes
+        </a>
+        <a href="{{ url_for('cobrancas') }}" class="btn">
+            <i class="bi bi-credit-card"></i>
+            Cobranças
+        </a>
     </div>
-  </div>
+    
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery-3.5.1.slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
 </body>
 </html>
